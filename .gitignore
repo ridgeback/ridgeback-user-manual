@@ -1,5 +1,6 @@
+ridgeback_usermanual.pdf
 *.aux
-Husky.pdf
+*.log
 *.toc
 *.out
 *.gz
