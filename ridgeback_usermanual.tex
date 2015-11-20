@@ -145,19 +145,6 @@ For more information on electrical integration, please see Electrical Integratio
 
 The Payload Integration Plate provides a robust foundation for mounting payload structures such as Baxter, UR5/UR10 manipulation arms, or any other combination of sensors and manipulators.   For more information and guidance on mounting payload structures on top of Ridgeback, please refer to Mechanical Mounting on page \pageref{mechanical}.
 
-
-
-\subsection{System Architecture}
-
-Like most robotic systems, Ridgeback has an onboard PC coupled to a custom microcontroller board. The microcontroller board handles IO, system and battery monitoring, and provides an interface to the CAN-controlled motor drivers. See the diagram in \autoref{systemarchitecture} for more details.
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=0.75\linewidth]{ridgeback-logic-conn.pdf}
-  \caption{System Architecture}
-  \label{systemarchitecture}
-\end{figure}
-
 \clearpage
 
 \subsection{Technical Specifications}
@@ -195,52 +182,6 @@ Key specifications of Ridgeback are shown in \autoref{systemspecs}.
 \end{table}
 \egroup
 
-\subsection{Safety Considerations}
-
-\subsubsection{General Warnings}
-
-Ridgeback is a rugged and high-performance vehicle. For the safety of yourself and others, always conduct initial experiments and software development with the vehicle raised off the ground. Place a wooden crate, a set of sawhorses, a sturdy storage tub, or any other solid flat structure having a height greater than 6 inches under Ridgeback to keep the wheels clear of the ground (“up on blocks”).
-
-When starting out, favor slower wheel speeds. Ridgeback's control loops can accurately maintain velocities as low as 0.1 m/s. Operating at such speeds will give you more time to react if things don’t go quite as you expect.
-
-\subsubsection{Stop Buttons}
-
-Two red Stop buttons are located on the back of Ridgeback. Power supply to Ridgeback's motor drivers is enabled by a normally-open relay, which is closed in series with the stop switch. When in Stop mode the Ridgeback will not drive. The commands received during stop are not buffered; Ridgeback will always act on the latest commands received. This means that if the commands are stopped before the Stop button is released, the Ridgeback will not move. If the commands are continued, Ridgeback will move at the speed commanded once the Stop is released.
-
-Always ensure the Stop button is accessible at all times. Avoid mounting payloads that extend over the rear of Ridgeback and would occlude the Stop buttons.
-
-\subsubsection{Electrical System}
-
-Ridgeback is powered by two lead-acid (PbSO4) deep-cycle AGM batteries, similar to the type found in electric wheelchairs, golf carts, and other vehicles. Ridgeback's battery is capable of delivering 2000W. This gives Ridgeback motors their great performance, however, it is also enough power to cause severe bodily harm. Always use caution when operating Ridgeback to avoid personal injury or property damange.  To ensure saftey, please observe the following precautions:
-
-\begin{itemize}[nolistsep]
-	\item Do not tamper with the plug attached to the battery.
-	\item Do not tamper with the fuse panel, except to check and change the fuses, and to connect and disconnect the 	battery plug.
-	\item Always replace fuses with the same type and rating to ensure continued protection against risk of fires
-	\item Always disconnect the battery before performing maintenance on the robot
-	\item Do not lay tools or other objects on top of the battery
-	\item Do not move the robot while charging the battery
-	\item Charge the battery only with the charger provided by Clearpath Robotics
-	\item Please dispose of the batteries properly, or return the battery to Clearpath Robotics to do so
-\end{itemize}
-
-\subsubsection{Lifting and Transport}
-
-\begin{itemize}[nolistsep]
-	\item Ensure that Ridgeback's Stop button is engaged when transporting short distances and powered off when transporting longer distances
-	\item Do not push the robot at more than 0.5 m/s (1.6 ft/s) or damage to the motor controls may occur
-\end{itemize}
-
-\subsubsection{Performance Recommendations}
-
-Included in Ridgeback are native software checks and limits to protect the vehicle. However, it is recommended to monitor the system’s status during usage with \lstinline{/diagnostics/rqt_robot_moitor}.
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=0.75\linewidth]{rqt_robot_monitor.png}
-  \caption{Robot Monitor}
-  \label{robotmonitor}
-\end{figure}
 
 
 
@@ -340,29 +281,68 @@ Additionally from your desktop, you can launch the standard RQT Robot Monitor, w
 rosrun rqt_robot_monitor rqt_robot_monitor
 \end{lstlisting}
 
-\section{Charging and Battery Maintenance}
+\section{Safety Considerations}
 
-Ridgeback uses two 8A31DTM Group-31 lead-acid (PbSO4) deep-cycle AGM batteries mounted low in the chassis. They provide an output of 24Vdc (nominal) and 100Ah of capacity and also serve as ballast to help keep the centre of gravity of the robot low, even with payloads mounted atop it.
+\subsection{General Warnings}
 
-Ridgeback has an internal charger. All that is required to charge Ridgeback is to open the User Bay access panel, locate the charger power cord and plug it into any 100-240Vac, 50/60Hz mains outlet. The robot can be turned "on" though we recommend against driving the robot when the battery is charging.
+Ridgeback is a rugged and high-performance vehicle. For the safety of yourself and others, always conduct initial experiments and software development with the vehicle raised off the ground. Place a wooden crate, a set of sawhorses, a sturdy storage tub, or any other solid flat structure having a height greater than 6 inches under Ridgeback to keep the wheels clear of the ground (“up on blocks”).
 
-If Ridgeback's batteries need replacement they're accessible by removing the top-plate and the insulator cover. Before performing any service or maintenance to the robot the battery pack must be fully disconnected. The batteries weigh approximately 33-kg (73-lbs) each so use all necessary care and caution when lifting the batteries out of the chassis. Please contact Clearpath Robotics regarding replacement batteries.
+When starting out, favor slower wheel speeds. Ridgeback's control loops can accurately maintain velocities as low as 0.1 m/s. Operating at such speeds will give you more time to react if things don’t go quite as you expect.
 
-The battery pack is rugged and designed for the environments into which Ridgeback may be deployed. However, please take note of the following:
+\subsection{Stop Buttons}
+
+Two red Stop buttons are located on the back of Ridgeback. Power supply to Ridgeback's motor drivers is enabled by a normally-open relay, which is closed in series with the stop switch. When in Stop mode the Ridgeback will not drive. The commands received during stop are not buffered; Ridgeback will always act on the latest commands received. This means that if the commands are stopped before the Stop button is released, the Ridgeback will not move. If the commands are continued, Ridgeback will move at the speed commanded once the Stop is released.
+
+Always ensure the Stop button is accessible at all times. Avoid mounting payloads that extend over the rear of Ridgeback and would occlude the Stop buttons.
+
+\subsection{Electrical System}
+
+Ridgeback is powered by two lead-acid (PbSO4) deep-cycle AGM batteries, similar to the type found in electric wheelchairs, golf carts, and other vehicles. Ridgeback's battery is capable of delivering 2000W. This gives Ridgeback motors their great performance, however, it is also enough power to cause severe bodily harm. Always use caution when operating Ridgeback to avoid personal injury or property damange.  To ensure saftey, please observe the following precautions:
 
 \begin{itemize}[nolistsep]
-	\item The batteries and/or robot must not be stored or operated above xx◦C or below yy◦C. (MPa - insert proper temps here)
-	\item If the robot is to be stored for any length of time it should be in a cool, dry location. The batteries should be fully charged and periodically maintained at full charge to ensure a long service life.
-	\item The batteries must not be punctured or disassembled.
-	\item The batteries should be disposed of pursuant to your local regulations regarding electrical and/or hazardous waste
-	\item If it is necessary to ship Ridgeback contact Clearpath Robotics for shipping information regarding the batteries.
+	\item Do not tamper with the plug attached to the battery.
+	\item Do not tamper with the fuse panel, except to check and change the fuses, and to connect and disconnect the 	battery plug.
+	\item Always replace fuses with the same type and rating to ensure continued protection against risk of fires
+	\item Always disconnect the battery before performing maintenance on the robot
+	\item Do not lay tools or other objects on top of the battery
+	\item Do not move the robot while charging the battery
+	\item Charge the battery only with the charger provided by Clearpath Robotics
+	\item Please dispose of the batteries properly, or return the battery to Clearpath Robotics to do so
 \end{itemize}
 
-Please contact Clearpath Robotics for additional information about Ridgeback's battery or for information about purchasing replacement batteries.
+\subsection{Lifting and Transport}
+
+\begin{itemize}[nolistsep]
+	\item Ensure that Ridgeback's Stop button is engaged when transporting short distances and powered off when transporting longer distances
+	\item Do not push the robot at more than 0.5 m/s (1.6 ft/s) or damage to the motor controls may occur
+\end{itemize}
+
+\subsection{Performance Recommendations}
+
+Included in Ridgeback are native software checks and limits to protect the vehicle. However, it is recommended to monitor the system’s status during usage with \lstinline{/diagnostics/rqt_robot_moitor}.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.75\linewidth]{rqt_robot_monitor.png}
+  \caption{Robot Monitor}
+  \label{robotmonitor}
+\end{figure}
+
 
 \section{Payload Integration Guide}
 
 If you want to attach custom hardware to Ridgeback, you will have to take care of mechnical mounting, electrical supply, and software integration.  This section aims to equip you with respect to these challenges.
+
+\subsection{System Architecture}
+
+Like most robotic systems, Ridgeback has an onboard PC coupled to a custom microcontroller board. The microcontroller board handles IO, system and battery monitoring, and provides an interface to the CAN-controlled motor drivers. See the diagram in \autoref{systemarchitecture} for more details.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.75\linewidth]{ridgeback-logic-conn.pdf}
+  \caption{System Architecture}
+  \label{systemarchitecture}
+\end{figure}
 
 \subsection{Mechanical Mounting}
 \label{mechanical}
@@ -425,13 +405,30 @@ For the best experience, consider purchasing supported accessories from Clearpat
 
 \section{Maintenance}
 
-\subsection{Battery Pack}
+\subsection{Battery \& Charging}
 
-Refer to other section
+Ridgeback uses two 8A31DTM Group-31 lead-acid (PbSO4) deep-cycle AGM batteries mounted low in the chassis. They provide an output of 24Vdc (nominal) and 100Ah of capacity and also serve as ballast to help keep the centre of gravity of the robot low, even with payloads mounted atop it.
+
+Ridgeback has an internal charger. All that is required to charge Ridgeback is to open the User Bay access panel, locate the charger power cord and plug it into any 100-240Vac, 50/60Hz mains outlet. The robot can be turned "on" though we recommend against driving the robot when the battery is charging.
+
+If Ridgeback's batteries need replacement they're accessible by removing the top-plate and the insulator cover. Before performing any service or maintenance to the robot the battery pack must be fully disconnected. The batteries weigh approximately 33-kg (73-lbs) each so use all necessary care and caution when lifting the batteries out of the chassis. Please contact Clearpath Robotics regarding replacement batteries.
+
+The battery pack is rugged and designed for the environments into which Ridgeback may be deployed. However, please take note of the following:
+
+\begin{itemize}[nolistsep]
+	\item The batteries and/or robot must not be stored or operated above xx◦C or below yy◦C. (MPa - insert proper temps here)
+	\item If the robot is to be stored for any length of time it should be in a cool, dry location. The batteries should be fully charged and periodically maintained at full charge to ensure a long service life.
+	\item The batteries must not be punctured or disassembled.
+	\item The batteries should be disposed of pursuant to your local regulations regarding electrical and/or hazardous waste
+	\item If it is necessary to ship Ridgeback contact Clearpath Robotics for shipping information regarding the batteries.
+\end{itemize}
+
+Please contact Clearpath Robotics for additional information about Ridgeback's battery or for information about purchasing replacement batteries.
+
 
 \subsection{Fuses}
 
-NEED CONTENT
+For continued protection against risk of fire, always replace fuses only with those of the same type and rating.
 
 \subsection{Tires}
 
