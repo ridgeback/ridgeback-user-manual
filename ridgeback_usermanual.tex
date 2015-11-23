@@ -22,7 +22,7 @@
 \tableofcontents
 
 \section{Introduction}
-Clearpath Robotics Ridgeback is a rugged, indoor omnidirectional platform designed to move manipulators and other heavy payloads with ease. This guide contains information about the setup, operation, and maintenance of your Ridgeback.
+Clearpath Robotics Ridgeback is a rugged, indoor omnidirectional platform designed to move manipulators and other heavy payloads with ease and precision. This guide contains information about the setup, safe operation, and maintenance of your Ridgeback unmanned omnidirectional platform.
 
 \subsection{What's Included}
 
@@ -35,7 +35,7 @@ Included with each Ridgeback are the following:
     \item{Hokuyo UST-10LX LIDAR (forward facing)}
     \item{User Integration Area with power, Ethernet, and USB connectivity}
     \item{24V Lead Acid Battery Pack}
-    \item{Battery Charger}
+    \item{Onboard Battery Charger}
   \end{itemize}
   \item 1x Sony Bluetooth controller
   \item 1x Ridgeback User Manual
@@ -43,17 +43,17 @@ Included with each Ridgeback are the following:
 
 \subsection{Expansions}
 
-To expand the capabilities of Ridgeback, consider the following integrated packages offered by Clearpath Robotics:
+To expand the capabilities of Ridgeback, consider the following packages offered by Clearpath Robotics:
 
 \subsubsection{LIDAR Upgrades}
 
-A rear-facing LIDAR is available, for a full 360 degree view of the robot's environment.
+A rear-facing LIDAR is available, which when combined with the standard front-facing LIDAR, offers Ridgeback a full 360 degree view of the environment.
 
-Additionally, either or both of the LIDARs may be upgraded to a SICK LMS111, offering expanded range and accuracy to your mapping and localization activities.
+Additionally, either or both of the LIDARs may be upgraded to our premium option, the SICK LMS111, offering expanded range and accuracy to your mapping and localization activities.
 
 \subsubsection{Baxter Package}
 
-The Baxter Package includes an adjustable podium mount, power system tie-ins and communication for Baxter, enabling the robot to be integrated in under 30 minutes. Easily coordinate behaviours between Ridgeback and Baxter with full ROS, Gazebo Physics Simulator, RViz and MoveIT! Motion planner support.
+The Baxter Package includes an adjustable podium mount, power system tie-ins and communication for Baxter. Easily coordinate behaviours between Ridgeback and Baxter with full ROS, Gazebo Simulator, RViz, and MoveIT! Motion planner support.
 
 The package includes the following elements:
 
@@ -66,7 +66,7 @@ Note that the integration between Ridgeback and Baxter is a quick and painless p
 
 \subsubsection{Universal Robot Manipulation Packages}
 
-The UR packages include mechanical mounting, integrated UR controller, power and communications for the selected Universal Robotics robot arm. Also included are a Robotiq 3-Finger gripper and a force torque sensor. Easily coordinate behaviours between Ridgeback and UR5 with full ROS, Gazebo Physics Simulator, RViz and MoveIT! Motion planner support.
+The UR packages include mechanical mounting, integrated UR controller, power and communications for the selected Universal Robotics robot arm. Also included are a Robotiq 3-Finger gripper and a force torque sensor. Easily coordinate behaviours between Ridgeback and UR5 with full ROS, Gazebo Simulator, RViz and MoveIT! Motion planner support.
 
 The following elements are included with the UR packages:
 
@@ -78,9 +78,11 @@ The following elements are included with the UR packages:
 	\item FLIR PTU D46-17 pan-tilt unit
 \end{itemize}
 
-\pagebreak[0]
 
+\pagebreak[4]
 \subsection{Hardware Overview}
+
+Please see \autoref{ridgeback_overview} for a view of some of Ridgeback's key external-facing features.
 
 \begin{figure}[h]
   \centering
@@ -89,22 +91,27 @@ The following elements are included with the UR packages:
   \label{ridgeback_overview}
 \end{figure}
 
+The two yellow side panels may be removed by sliding them upward and away from the main chassis. The starboard-side bay contains Ridgeback's integrated computer, network switch, and main microcontroller PCB. Under most ordinary circumstances, you should not need to access this bay. The port-side bay is the user bay, discussed below in \autoref{user_bay}
+
+
+\pagebreak[4]
 \subsubsection{Rear Buttons}
 
-There are four push buttons located on the back of the Ridgeback: Stop, Stop Reset and Power ON/OFF.   Each button is described in \autoref{rearbuttons}.
+There are four push buttons located on the back of the Ridgeback: The two red mushroom stop buttons, the stop reset button below the port side stop button, and the power ON/OFF button below the starboard side stop. These are described further in \autoref{rearbuttons}.
 
 \bgroup
 \def\arraystretch{1.2}%
 \begin{table}[h]
 	\centering
-	\begin{tabular}{>{\columncolor{lightgrey}}>{\raggedright}m{.25\textwidth} p{.75\textwidth}} \hline
+	\begin{tabular}{>{\columncolor{lightgrey}}>{\raggedright}m{.20\textwidth} p{.75\textwidth}} \hline
 
-	Power ON/OFF & Turns on/off the Ridgeback. \\ \hline
+	Power ON/OFF & Turns Ridgeback on or off. Note that the power button is a soft, momentary switch: to shut Ridgeback down, press and release it, and when the onboard PC has completed a safe power-down, the robot itself will also de-power. \\ \hline
 
-	Stop (x2) & Stops the robot by placing the four integrated motor drivers into an electrical reset condition. This is intended as a backup option for immobilizing Ridgeback when autonomy software malfunctions or commands unintended motion. The stop buttons have a mechanical latch, which can be released by twisting the latched button. \\ \hline
+	Stop (x2) & Stops Ridgeback by placing the four integrated motor drivers into an electrical reset condition. This is intended as a backup option for immobilizing Ridgeback when autonomy software malfunctions or commands unintended motion. The stop buttons have a mechanical latch, which can be released by twisting the latched button.
 
-	Stop Reset & Allows Ridgeback to run again after it has been stopped via Stop button. \\ \hline
+	If you have a wireless e-stop, pendant, or other stop-asserting hardware you'd like to integrate with Ridgeback, a breakout header is supplied on the main microcontroller PCB. For details on this interface, please contact Clearpath Robotics. \\ \hline
 
+	Stop Reset & Clears the electrically-enforced stop latch, allowing Ridgeback to run again after it has been stopped via one of the stop buttons. Note that the mushroom button's mechanical latch must be cleared before the electrical reset can have any effect. \\ \hline
 	\end{tabular}
 \newline
 \caption{Ridgeback Rear Buttons}
@@ -113,15 +120,49 @@ There are four push buttons located on the back of the Ridgeback: Stop, Stop Res
 \egroup
 
 
-\subsubsection{User Bay}
+\pagebreak[4]
+\subsubsection{Body Lights}
 
-The User Bay provides access to the User Power electrical panel, USB and Ethernet ports, and additional space for stowing user equipment.  The electrical panel can be used to power your payloads. The USB3 ports are connected directly to the onboard PC, and the ethernet ports connect to the onboard network switch. To connect a device to the onboard network, it's suggested to give it a static IP in the 192.168.131.x subnet, avoiding IPs in use by the following pre-existing devices:
+Ridgeback includes eight RGB body lights, stacked in a pair on each corner of the chassis. These lights express system status according to \autoref{body_lights}, but in the absence of one of the low-level conditions, they can be commanded from ROS to display indications from autonomy or other higher-level software.
+
+See \url{http://wiki.ros.org/ridgeback_base} for information on commanding the body lights.
 
 \bgroup
 \def\arraystretch{1.2}%
 \begin{table}[h]
 	\centering
-	\begin{tabular}{>{\columncolor{lightgrey}}>{\raggedright}m{.25\textwidth} p{.75\textwidth}} \hline
+	\begin{tabular}{>{\columncolor{lightgrey}}>{\raggedright}m{.25\textwidth} p{.7\textwidth}} \hline
+
+	Solid red & The MCU is not in contact with the computer. That is, the rosserial connection not active. This condition will be seen briefly on startup while Ridgeback's computer is booting up. If it persists, or is seen after initialization, either the base node on the PC has crashed, the network switch has failed, or a serious MCU error has occurred. If you suspect one of these conditions, please contact support. \\ \hline
+
+	Red flashing & Stop circuit is broken. Twist the mushroom buttons to ensure that they are unlatched, and check any external stop hardware, if present. \\ \hline
+
+	Yellow corner flashing & All stops are closed, the stop loop is now only electrically latched. Press the stop reset button to enable full operation. \\ \hline
+
+  Flashing yellow & Motor drivers not yet ready to drive. The motors have a brief initialization sequence which must complete after a stop condition clears before they are ready to drive. If this condition persists, please contact support. \\ \hline
+
+  Fading green & Charger is connected, Ridgeback's battery is charging. Note that the battery can also be charged with the platform off. This indication will only be seen if the charger is connected while Ridgeback is powered up. \\ \hline
+
+  Headlights/taillights & When Ridgeback is ready to drive, the front will change from red to white. The intensity of the head and tail lights will increase slightly when actually in motion. This is the status which may be overridden by publishing your own light patterns to the \lstinline{/cmd_lights} ROS topic. \\ \hline
+
+	\end{tabular}
+\newline
+\caption{Ridgeback Body Light Indications}
+\label{body_lights}
+\end{table}
+\egroup
+
+
+\pagebreak[4]
+\subsubsection{User Bay}\label{user_bay}
+
+The User Bay provides access to the User Power panel, as well as USB and Ethernet ports, and additional space for stowing user equipment.  The electrical panel can be used to power your payloads. The USB3 ports are connected directly to the onboard PC, and the ethernet ports connect to the onboard network switch. To connect a device to the onboard network, it's suggested to give it a static IP in the \lstinline{192.168.131.x} subnet, avoiding IPs in use by the following pre-existing devices:
+
+\bgroup
+\def\arraystretch{1.2}%
+\begin{table}[h]
+	\centering
+	\begin{tabular}{>{\columncolor{lightgrey}}>{\raggedright}m{.3\textwidth} p{.65\textwidth}} \hline
 
 	192.168.1.1 & Onboard PC (both ports, br0 network interface). \\ \hline
 
@@ -129,7 +170,7 @@ The User Bay provides access to the User Power electrical panel, USB and Etherne
 
 	192.168.1.14 & Front-facing LIDAR. \\ \hline
 
-	192.168.1.15 & Rear-facing LIDAR (optional). \\ \hline
+	192.168.1.13 & Rear-facing LIDAR (optional). \\ \hline
 
 	\end{tabular}
 \newline
@@ -138,12 +179,12 @@ The User Bay provides access to the User Power electrical panel, USB and Etherne
 \end{table}
 \egroup
 
-For more information on electrical integration, please see Electrical Integration on page \pageref{electrical}.
+For more information on electrical integration, please see \autoref{electrical} on page \pageref{electrical}.
 
 
 \subsubsection{Payload Integration Plate}
 
-The Payload Integration Plate provides a robust foundation for mounting payload structures such as Baxter, UR5/UR10 manipulation arms, or any other combination of sensors and manipulators.   For more information and guidance on mounting payload structures on top of Ridgeback, please refer to Mechanical Mounting on page \pageref{mechanical}.
+The Payload Integration Plate provides a robust foundation for mounting payload structures such as Baxter, UR5/UR10 manipulation arms, or any other combination of sensors and manipulators.   For more information and guidance on mounting payload structures on top of Ridgeback, please refer to \autoref{mechanical} on page \pageref{mechanical}.
 
 \clearpage
 
@@ -187,68 +228,40 @@ Key specifications of Ridgeback are shown in \autoref{systemspecs}.
 
 \section{Getting Started}
 
-The first step is to power up your Ridgeback and have some fun driving it around! If you’ve just unpacked Ridgeback
-from its shipment packaging, you’ll need to open it up and connect the battery.
+The first step is to power up your Ridgeback and have some fun driving it around! If you’re just opening up the shipping crate, you can unfold the ramp, and remove the ratchet straps which secure Ridgeback during shipping.
 
-Press the power button on the back of the Ridgeback. The LEDs should show a test pattern, after which you will
-wait about 30 seconds for the internal PC to finish booting up.
+Press the power button on the back of Ridgeback. Once the body lights are flashing red, clear the two stop buttons (if necessary), and press the blinking red stop reset button. In a moment, the platform should go to solid red lights in back, and solid white in front.
 
-Press the PS/P3 button on the Sony Bluetooth controller to sync the controller to Ridgeback. Once the small red
-LED on the controller goes solid, you’re paired and ready to drive. Hold the L2 trigger button, and push the
-thumbstick forward. For full speed mode, switch to the L1 trigger.
+Press the PS button on the Sony Bluetooth controller to sync the controller to Ridgeback. Once the \#1 LED on the top of the controller goes solid, you’re paired and ready to drive. Hold the L1 trigger button, and pull the left thumbstick down. This should cause Ridgeback to back slowly down the ramp onto level ground. Once there, you can experiment with the teleop controls: left thumbstick to translate in X and Y, and right thumbstick to rotate on the spot.
 
 If you’re not seeing any action, check Contact on \autoref{contact} to get in touch with support.
 
 \subsection{Wireless Access}
 
-To get Ridgeback connected to your local wifi, you must first access the internal computer using a wired connection.
-Open the User Bay, and connect to one of the the network ports with a standard
-ethernet cable. Now, set your laptop’s ethernet port to a static IP such as \lstinline{192.168.1.51}, and connect via SSH
-to \lstinline{administrator@192.168.1.1}. The default password is \lstinline{clearpath}.
+To get Ridgeback connected to your local wifi, you must first access the internal computer using a wired connection. Open the User Bay, and connect to one of the the network ports with a standard ethernet cable. Now, set your laptop’s ethernet port to a static IP such as \lstinline{192.168.131.51}, and connect via SSH to \lstinline{administrator@192.168.131.1}. The default password is \lstinline{clearpath}.
 
-Once connected via wire, execute \lstinline{wicd-curses} to enter the text/curses UI to the wireless interface configuration daemon (WICD). Within the text UI, you can configure which wireless network you’d like Ridgeback to connect to upon system startup.
+Once connected via wire, execute \lstinline{connmanctl} to enter the command line interface for Connman, from which you can configure Ridgeback to either join and existing network, or supply its own standalone access point. An example session to connect to an existing network:
 
-When the wireless link is established, remove the network cable, re-establish your SSH session over wireless,
-and close the Ridgeback User Bay.
+\begin{lstlisting}
+connmanctl> scan wifi
+connmanctl> services
+connmanctl> agent on
+connmanctl> connect wifi_123456_123456789123456789_managed_psk
+\end{lstlisting}
+
+After the \lstinline{connect} line, connman will prompt you for your network's passphrase. Once connected, connman will remember and attempt to reconnect on successive power-ons.
 
 \subsection{Remote ROS Connectivity}
 
-Now that Ridgeback is on the wireless, you can access it via SSH or as a remote ROS master. Note that in
-the default configuration, the background job running on Ridgeback launches with the \lstinline{robot_upstart} package,
-which is configured to set the ROS\_IP environment variable to the static IP of the em1 ethernet port, by default
-\lstinline{192.168.1.1}.
+Now that Ridgeback is on the wireless, you can access it via SSH or as a remote ROS master. Note that in the default configuration, the background job running on Ridgeback launches with the \lstinline{robot_upstart} package, which is configured to set the \lstinline{ROS_HOSTNAME} environment variable to the Ridgeback PC's hostname.
 
-What this means is that in order for a workstation to communicate with Ridgeback over wireless, you may need to
-change one of three things:
+If your network resolves hostnames properly, connecting to
 
-1. If you’re confident that Ridgeback will be operated only where it is connected to wifi, you could set
-\lstinline{robot_upstart} to start the background ROS job only once wifi connects. To change this, run:
-
-\begin{lstlisting}
-rosrun robot_upstart install ridgeback_base/launch/base.launch \
---job ros --interface wlan0
-\end{lstlisting}
-
-
-2. If you’re confident that your network will resolve hostnames correctly, you could change the generated
-ROS start script (in \lstinline{/usr/sbin/ros-start}) to set the \lstinline{ROS_HOSTNAME} env var rather than \lstinline{ROS_IP}.
-
-3. Finally, you can add a static route to your workstation which will route requests from 192.168.1.1 to
-Ridgeback's real wireless IP on your network. An example of this configuration:
-
-\begin{lstlisting}
-sudo apt-get install ros-indigo -robot-upstart
-export ROS_MASTER_URI=http://192.168.1.1:11311
-export ROS_IP=$(rosrun robot_upstart getifip wlan0)
-sudo route add -net 192.168.1.1 netmask 255.255.255.255 gw $ROS_IP
-\end{lstlisting}
-
-These commands would be executed on your own machine.
 
 Please contact Clearpath Support if guidance is required in selecting and executing a remote access strategy.
 For more general details on how ROS works over TCP with multiple machines, please see:
 
-\url{http://wiki.ros.org/ROS/Tutorials/MultipleMachines.}
+\url{http://wiki.ros.org/ROS/Tutorials/MultipleMachines}
 
 For help troubleshooting a multiple machines connectivity issue, see:
 
@@ -264,7 +277,7 @@ http://wiki.ros.org/indigo/Installation/Ubuntu
 When your ROS install is set up, install the Ridgeback desktop packages:
 
 \begin{lstlisting}
-sudo apt-get install ros-indigo -ridgeback -desktop
+sudo apt-get install ros-indigo-ridgeback-desktop
 \end{lstlisting}
 
 Once your remote access to Ridgeback's ROS master is configured, you can launch rviz, the standard ROS robot visualization tool:
@@ -275,11 +288,19 @@ roslaunch ridgeback_viz view_robot.launch
 
 From within rviz, you can use interactive markets to drive Ridgeback, you can visulize its published localization estimate, and you can visualize any attached sensors which have been added to its robot description XML (URDF).
 
-Additionally from your desktop, you can launch the standard RQT Robot Monitor, which watches the diagnoztic output from Ridgeback's self-monitoring capabilities:
+Additionally from your desktop, you can launch the standard RQT Robot Monitor, which watches the diagnostic output from Ridgeback's self-monitoring capabilities:
 
 \begin{lstlisting}
 rosrun rqt_robot_monitor rqt_robot_monitor
 \end{lstlisting}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.75\linewidth]{rqt_robot_monitor.png}
+  \caption{Robot Monitor}
+  \label{robotmonitor}
+\end{figure}
+
 
 \section{Safety Considerations}
 
@@ -291,23 +312,23 @@ When starting out, favor slower wheel speeds. Ridgeback's control loops can accu
 
 \subsection{Stop Buttons}
 
-Two red Stop buttons are located on the back of Ridgeback. Power supply to Ridgeback's motor drivers is enabled by a normally-open relay, which is closed in series with the stop switch. When in Stop mode the Ridgeback will not drive. The commands received during stop are not buffered; Ridgeback will always act on the latest commands received. This means that if the commands are stopped before the Stop button is released, the Ridgeback will not move. If the commands are continued, Ridgeback will move at the speed commanded once the Stop is released.
+Two red Stop buttons are located on the back of Ridgeback. When in Stop mode the Ridgeback will not drive. The commands received during stop are not buffered; Ridgeback will always act on the latest commands received. This means that if the commands are stopped before the Stop button is released, the Ridgeback will not move. If the commands are continued, Ridgeback will move at the speed commanded once the Stop is released.
 
 Always ensure the Stop button is accessible at all times. Avoid mounting payloads that extend over the rear of Ridgeback and would occlude the Stop buttons.
 
 \subsection{Electrical System}
 
-Ridgeback is powered by two lead-acid (PbSO4) deep-cycle AGM batteries, similar to the type found in electric wheelchairs, golf carts, and other vehicles. Ridgeback's battery is capable of delivering 2000W. This gives Ridgeback motors their great performance, however, it is also enough power to cause severe bodily harm. Always use caution when operating Ridgeback to avoid personal injury or property damange.  To ensure saftey, please observe the following precautions:
+Ridgeback is powered by two lead-acid (PbSO4) deep-cycle AGM batteries, similar to the type found in electric wheelchairs, golf carts, and other vehicles. Ridgeback's battery is capable of delivering 2000W. This gives Ridgeback motors their great performance, however, it is also enough power to cause severe bodily harm. Always use caution when operating Ridgeback to avoid personal injury or property damage.  To ensure safety, please observe the following precautions:
 
 \begin{itemize}[nolistsep]
-	\item Do not tamper with the plug attached to the battery.
+	\item Do not tamper with the battery terminals or wiring.
 	\item Do not tamper with the fuse panel, except to check and change the fuses, and to connect and disconnect the 	battery plug.
-	\item Always replace fuses with the same type and rating to ensure continued protection against risk of fires
-	\item Always disconnect the battery before performing maintenance on the robot
-	\item Do not lay tools or other objects on top of the battery
-	\item Do not move the robot while charging the battery
-	\item Charge the battery only with the charger provided by Clearpath Robotics
-	\item Please dispose of the batteries properly, or return the battery to Clearpath Robotics to do so
+	\item Always replace fuses with the same type and rating to ensure continued protection against risk of fires.
+	\item Consult Clearpath Robotics support if you need to service the battery pack.
+	\item Do not lay tools or other objects on top of the battery.
+	\item Do not move the robot while charging the battery.
+	\item Charge the battery only with the integrated charger installed by Clearpath Robotics.
+	\item Please dispose of the batteries properly, or return the battery to Clearpath Robotics to do so.
 \end{itemize}
 
 \subsection{Lifting and Transport}
@@ -316,17 +337,6 @@ Ridgeback is powered by two lead-acid (PbSO4) deep-cycle AGM batteries, similar 
 	\item Ensure that Ridgeback's Stop button is engaged when transporting short distances and powered off when transporting longer distances
 	\item Do not push the robot at more than 0.5 m/s (1.6 ft/s) or damage to the motor controls may occur
 \end{itemize}
-
-\subsection{Performance Recommendations}
-
-Included in Ridgeback are native software checks and limits to protect the vehicle. However, it is recommended to monitor the system’s status during usage with \lstinline{/diagnostics/rqt_robot_moitor}.
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=0.75\linewidth]{rqt_robot_monitor.png}
-  \caption{Robot Monitor}
-  \label{robotmonitor}
-\end{figure}
 
 
 \section{Payload Integration Guide}
@@ -347,22 +357,23 @@ Like most robotic systems, Ridgeback has an onboard PC coupled to a custom micro
 \subsection{Mechanical Mounting}
 \label{mechanical}
 
-The payload integration plate can be used to mount external payloads ontop of the Ridgeback.   The plate is made of aluminum, which provides a level of robustness to support payloads up to 100 kg (220 lbs).   Ridgeback's battery packs are positioned low in the chasis and slightly rearward of center of the robot to balance the weight distribution when mounting front-facing manipulator payloads. To minimize the possibility of tipping over, payload structures should always be mounted as close to center as possible.
+The payload integration plate can be used to mount external payloads on top of the Ridgeback.   The plate is made of aluminum, which provides a level of robustness to support payloads up to 100 kg (220 lbs).   Ridgeback's battery packs are positioned low in the chassis and slightly rearward of center of the robot to balance the weight distribution when mounting front-facing manipulator payloads. To minimize the possibility of tipping over, payload structures should always be mounted as close to center as possible.
 
 \subsubsection{Payload Mounting Holes}
 
-Located at the front-end of the mounting plate are two 5/8"-11 screw holes for mounting Baxter, UR5/UR510 manipulator arms, or any other payload structure.  These holes are indicated in \autoref{payloadplate}. If you purchased the Baxter or UR5/UR10 package from Clearpath Robotics, Ridgeback will come with the required hardware adapaters and two 5/8"-11 Socket Head Cap Screws to securely mount the payload structure to the plate.
+Located at the front-end of the mounting plate are two 5/8"-11 screw holes for mounting Baxter, UR5/UR510 manipulator arms, or any other payload structure.  These holes are indicated in \autoref{payloadplate}. If you purchased the Baxter or UR5/UR10 package from Clearpath Robotics, Ridgeback will come with the required hardware adapters to securely mount the payload structures to the plate.
 
 If your payload structure requires additional mounting holes or a different hole configuration, the plate can be removed and additional holes can be drilled.  To remove the mounting plate, simply remove the screws that form the diamond pattern on top of the plate.
 
-\textbf{Note:}  Permanent damage resulting from custom modifications to the mounting plate is not covered under warranty and may not be supported by Clearpath Support.  Please contact our support team if you require assistance or have any questions relating to custom modifications.
-
+\begin{warning}[]
+Permanent damage resulting from custom modifications to the mounting plate is not covered under warranty and may not be supported by Clearpath Support.  Please contact our support team if you require assistance or have any questions relating to custom modifications.
+\end{warning}
 
 \subsubsection{Cable Passthroughs}
 
 The two larger holes on the left and right side of the plate allow you to pass electrical wires and cables from the mounted payloads into the encolsed User Bay and the PC Bay.  Electrical wires should always pass through the provided plastic grommets to protect against cutting and abrasion.
 
-\begin{figure}[!htb]
+\begin{figure}[!hbt]
   \centering
   \includegraphics[width=0.75\linewidth]{Payload_Integration_Plate.pdf}
   \caption{Ridgeback Payload Integration}
@@ -372,17 +383,7 @@ The two larger holes on the left and right side of the plate allow you to pass e
 \subsection{Electrical Integration}
 \label{electrical}
 
-The three white Molex user power receptacles located in the User Bay are capable of supplying 5Vdc, 12Vdc, and unregulated battery voltage (approximately 24Vdc) for powering Ridgeback's payloads. See the \autoref{userpower} for an labeled illustration and the pin assignments. The total draw allowed on each rail is 5-amps. The mating connector for these Molex Mini Fit Jr (tm) receptacles is 39-01-2040, available at Digikey (part number WM3701-ND.) Ensure you select the contact appropriate for the gauge of wire used.
-
-The single red and black Anderson connector pair provides unregulated battery voltage (approximately 24Vdc) at up to 20-amps peak. The mating parts are Anderson PP45 Power Pole (tm) 1327 (red housing), 1327G6 (black housing) and 261G2-LPBK (contacts.) These components are readily available at \url{Mouser.com}.
-
-The rails on the User Bay Power board are protected against short circuit by fuses. See the illustration for the fuse locations and purposes.
-
-\textbf{WARNING:} For continued protection against risk of fire, always replace fuses only with those of the same type and rating.
-
-\textbf{CAUTION:} The unregulated battery output may range from as low as 20Vdc up to 30Vdc or more depending on the state of charge of the battery pack and the electrical loading on the system. Ensure any accessories connected to that rail are able to deal with unregulated battery voltages.
-
-
+The three white Molex user power receptacles located in the User Bay are capable of supplying 5Vdc, 12Vdc, and unregulated battery voltage (approximately 24Vdc) for powering Ridgeback's payloads. See the \autoref{userpower} for an labeled illustration and the pin assignments. The total draw permitted on each rail is 5A. The mating connector for these Molex Mini Fit Jr (tm) receptacles is \lstinline{39-01-2040}, available on Digikey as \lstinline{M3701-ND}. Ensure you select contact appropriate for the gauge of wire used.
 
 \begin{figure}[h]
   \centering
@@ -391,15 +392,24 @@ The rails on the User Bay Power board are protected against short circuit by fus
   \label{userpower}
 \end{figure}
 
+The single red and black Anderson connector pair provides unregulated battery voltage (approximately 24Vdc) at up to 20-amps peak. The mating parts are Anderson PP45 Power Pole (tm) 1327 (red housing), 1327G6 (black housing) and 261G2-LPBK (contacts.) These components are readily available at \url{http://mouser.com}.
 
+The rails on the User Bay Power board are protected against short circuit by fuses. See the illustration for the fuse locations and purposes.
 
+\begin{warning}[Risk of Fire]
+For continued protection against risk of fire, always replace fuses only with those of the same type and rating.
+\end{warning}
+
+\begin{warning}[Unregulated Rail]
+The unregulated battery output may range from as low as 20Vdc up to 30Vdc or more depending on the state of charge of the battery pack and the electrical loading on the system. Ensure any accessories connected to that rail are able to deal with unregulated battery voltages.
+\end{warning}
 
 
 \subsection{Software Integration}
 
 ROS has a large ecosystem of sensor drivers, some of which include pre-made URDF description and even simulation configurations.  Please see the following page on the ROS wiki for a partial list:
 
-\url{http://wiki.ros.org/Sensors }
+\url{http://wiki.ros.org/Sensors}
 
 For the best experience, consider purchasing supported accessories from Clearpath Robotics for your Ridgeback, which will include simulation, visualization, and driver support.  However, we will happily assist you in integrating your own devices as well.
 
@@ -416,27 +426,26 @@ If Ridgeback's batteries need replacement they're accessible by removing the top
 The battery pack is rugged and designed for the environments into which Ridgeback may be deployed. However, please take note of the following:
 
 \begin{itemize}[nolistsep]
-	\item The batteries and/or robot must not be stored or operated above xx◦C or below yy◦C. (MPa - insert proper temps here)
+	\item The batteries and/or robot must not be stored or operated above 50◦C or below -20◦C.
 	\item If the robot is to be stored for any length of time it should be in a cool, dry location. The batteries should be fully charged and periodically maintained at full charge to ensure a long service life.
 	\item The batteries must not be punctured or disassembled.
 	\item The batteries should be disposed of pursuant to your local regulations regarding electrical and/or hazardous waste
-	\item If it is necessary to ship Ridgeback contact Clearpath Robotics for shipping information regarding the batteries.
 \end{itemize}
 
-Please contact Clearpath Robotics for additional information about Ridgeback's battery or for information about purchasing replacement batteries.
+Please contact Clearpath Robotics for additional information about Ridgeback's battery pack.
 
 
-\subsection{Fuses}
-
-For continued protection against risk of fire, always replace fuses only with those of the same type and rating.
-
-\subsection{Tires}
-
-NEED CONTENT
-
-\subsection{Cleaning}
-
-NEED CONTENT
+%\subsection{Fuses}
+%
+%For continued protection against risk of fire, always replace fuses only with those of the same type and rating.
+%
+%\subsection{Tires}
+%
+%NEED CONTENT
+%
+%\subsection{Cleaning}
+%
+%NEED CONTENT
 
 \section{Contact}
 \label{contact}
@@ -445,7 +454,7 @@ Clearpath is committed to your success with Ridgeback. Please get in touch with 
 you rolling again quickly: \url{support@clearpathrobotics.com}.
 
 To get in touch with a salesperson regarding Ridgeback or other Clearpath Robotics products, please email
-sales@clearpathrobotics.com.
+\url{sales@clearpathrobotics.com}.
 
 If you have a an issue that is specifically about ROS and is something which may be of interest to the broader
 community, consider asking it on answers.ros.org. If you don’t get a satisfactory response, please ping us and
