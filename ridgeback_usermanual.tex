@@ -91,7 +91,7 @@ Please see \autoref{ridgeback_overview} for a view of some of Ridgeback's key ex
   \label{ridgeback_overview}
 \end{figure}
 
-The two yellow side panels may be removed by sliding them upward and away from the main chassis. The starboard-side bay contains Ridgeback's integrated computer, network switch, and main microcontroller PCB. Under most ordinary circumstances, you should not need to access this bay. The port-side bay is the user bay, discussed below in \autoref{user_bay}
+The two yellow side panels may be removed by sliding them upward and away from the main chassis. The starboard-side bay contains Ridgeback's integrated computer, network switch, and main microcontroller PCB. Under most ordinary circumstances, you should not need to access this bay. The port-side bay is the user bay, discussed below on page \pageref{userbay}
 
 
 \pagebreak[4]
@@ -154,7 +154,7 @@ See \url{http://wiki.ros.org/ridgeback_base} for information on commanding the b
 
 
 \pagebreak[4]
-\subsubsection{User Bay}\label{user_bay}
+\subsubsection{User Bay}\label{userbay}
 
 The User Bay provides access to the User Power panel, as well as USB and Ethernet ports, and additional space for stowing user equipment.  The electrical panel can be used to power your payloads. The USB3 ports are connected directly to the onboard PC, and the ethernet ports connect to the onboard network switch. To connect a device to the onboard network, it's suggested to give it a static IP in the \lstinline{192.168.131.x} subnet, avoiding IPs in use by the following pre-existing devices:
 
@@ -210,7 +210,7 @@ Key specifications of Ridgeback are shown in \autoref{systemspecs}.
 	Operating Time & 4 hrs typical, 8 Hours max \\ \hline
 	Charge Time &  5 Hours approx \\ \hline
 	User Power & 5 V, 12 V, 24 VDC (fused at 10A each), option 120 VAC \\ \hline
-	Drive Power & 200 W peak, 800 W continuous \\ \hline
+	Power & 800 W Typical Use, Shore Power Available \\ \hline
 	Control Modes & Kinematic control (forward, sideways, rotation), individual wheel velocities \\ \hline
 	Feedback & Battery, gyroscope and accelerometer \\ \hline
 	Communication &  Ethernet, USB 3.0, RS 232 \\ \hline
@@ -436,7 +436,7 @@ For the best experience, consider purchasing supported accessories from Clearpat
 
 Ridgeback uses two 8A31DTM Group-31 lead-acid (PbSO4) deep-cycle AGM batteries mounted low in the chassis. They provide an output of 24Vdc (nominal) and 100Ah of capacity and also serve as a ballast to help keep the centre of gravity of the robot low, even with payloads mounted atop it.
 
-Ridgeback has an internal charger. All that is required to charge Ridgeback is to open the User Bay access panel, locate the charger power cord and plug it into any 100-240Vac, 50/60Hz mains outlet. The robot can be turned "on" though we recommend against driving the robot when the battery is charging.
+Ridgeback has an internal charger. All that is required to charge Ridgeback is to open the User Bay access panel, locate the charger power cord and plug it into any 85-270, 50/60Hz mains outlet. The robot can be turned "on" though we recommend against driving the robot when the battery is charging.
 
 If Ridgeback's batteries need replacement, they're accessible by removing the top-plate and the insulator cover. Before performing any service or maintenance to the robot, the battery pack must be fully disconnected. The batteries weigh approximately 33-kg (73-lbs) each so use all necessary care and caution when lifting the batteries out of the chassis. Please contact Clearpath Robotics regarding replacement batteries.
 
