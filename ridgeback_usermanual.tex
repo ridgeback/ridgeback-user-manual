@@ -15,6 +15,15 @@
 \usepackage{colortbl}
 \usepackage{array}
 \usepackage{hyperref}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\lfoot{Rev. 1.1.2}
+\rfoot{Ridgeback}
+\lhead{}         
+\chead{}              
+\rhead{}  
+\renewcommand{\headrulewidth}{0pt}
+
 
 \begin{document}
 
@@ -198,8 +207,8 @@ Key specifications of Ridgeback are shown in \autoref{systemspecs}.
 	\centering
 	\begin{tabular}{>{\columncolor{lightgrey}}>{\raggedright}m{.30\textwidth} p{.70\textwidth}} \hline
 
-	External Dimensions (L x W x H) & 932 x 793 x 298 mm   (36.7 x 31.1 x 11.7 in) \\ \hline
-	Weight & 125 kg (275 Ilbs) \\ \hline
+	External Dimensions (L x W x H) & 960 x 793 x 296 mm   (37.7 x 31.1 x 11.6 in) \\ \hline
+	Weight & 135 kg (297 Ilbs) \\ \hline
 	Obstacle Clearance & 18 mm (0.7 in) \\ \hline
 	Max Payload  &  100kg (220 lbs)  \\ \hline
 	Max Speed  &  1.1 m/s (3.6 ft/s) \\ \hline
@@ -207,12 +216,12 @@ Key specifications of Ridgeback are shown in \autoref{systemspecs}.
 	Operating Environment  &  Indoor \\ \hline
 	Battery Chemistry & Marine Grade AGM Sealed Lead Acid \\ \hline
 	Capacity &  24 V 100 Ah \\ \hline
-	Operating Time & 4 hrs typical, 8 Hours max \\ \hline
-	Charge Time &  5 Hours approx \\ \hline
+	Operating Time & 15 hrs with max payload \\ \hline
+	Charge Time &  8 Hours approx \\ \hline
 	User Power & 5 V, 12 V, 24 VDC (fused at 10A each), option 120 VAC \\ \hline
 	Power & 800 W Typical Use, Shore Power Available \\ \hline
 	Control Modes & Kinematic control (forward, sideways, rotation), individual wheel velocities \\ \hline
-	Feedback & Battery, gyroscope and accelerometer \\ \hline
+	Feedback & Encoders, Onboard IMU \\ \hline
 	Communication &  Ethernet, USB 3.0, RS 232 \\ \hline
 	Drivers and APIs  &  ROS Indigo, Gazebo, Navigation Support, MoveIt! \\ \hline
 
@@ -243,6 +252,7 @@ To get Ridgeback connected to your local wifi, you must first access the interna
 Once connected via wire, execute \lstinline{connmanctl} to enter the command line interface for Connman, from which you can configure Ridgeback to either join an existing network, or supply its own standalone access point. An example session to connect to an existing network:
 
 \begin{lstlisting}
+connmanctl> enable wifi
 connmanctl> scan wifi
 connmanctl> services
 connmanctl> agent on
@@ -255,7 +265,7 @@ After the \lstinline{connect} line, connman will prompt you for your network's p
 
 Now that Ridgeback is on the wireless network, you can access it via SSH or as a remote ROS master. Note that in the default configuration, the background ROS process running on Ridgeback launches with the \lstinline{robot_upstart} package, which is configured to set the \lstinline{ROS_HOSTNAME} environment variable to the Ridgeback PC's hostname.
 
-If your network resolves hostnames properly, connecting to should be a matter of executing the following two lines in your desktop (or sourcing a script containing these lines):
+If your network resolves hostnames properly, connecting should be a matter of executing the following two lines in your desktop (or sourcing a script containing these lines):
 
 \begin{lstlisting}
 export ROS_MASTER_URI=http://cpr-ridgeback:11311  # Your robot's hostname
