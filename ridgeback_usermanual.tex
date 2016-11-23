@@ -17,11 +17,11 @@
 \usepackage{hyperref}
 \usepackage{fancyhdr}
 \pagestyle{fancyplain}
-\lfoot{Rev. 1.1.2}
+\lfoot{Rev. 1.1.3}
 \rfoot{Ridgeback}
-\lhead{}
-\chead{}
-\rhead{}
+\lhead{}         
+\chead{}              
+\rhead{}  
 \renewcommand{\headrulewidth}{0pt}
 
 
@@ -40,7 +40,7 @@ Included with each Ridgeback are the following:
 \begin{itemize}[nolistsep]
   \item 1x Ridgeback Omnidirectional Robotic Platform
   \begin{itemize}
-    \item{Integrated Intel i5 Mini-ITX Computer}
+    \item{Integrated Core i5 Mini-ITX Computer}
     \item{Hokuyo UST-10LX LIDAR (forward facing)}
     \item{User Integration Area with power, Ethernet, and USB connectivity}
     \item{24V Lead Acid Battery Pack}
@@ -104,9 +104,9 @@ The two yellow side panels may be removed by sliding them upward and away from t
 
 
 \pagebreak[4]
-\subsubsection{Rear Buttons}
+\subsubsection{Buttons}
 
-There are four push buttons located on the back of the Ridgeback: The two red mushroom stop buttons, the stop reset button below the port side stop button, and the power ON/OFF button below the starboard side stop. These are described further in \autoref{rearbuttons}.
+There are four push buttons located on the back of the Ridgeback: The two red mushroom stop buttons, the stop reset button below the port side stop button, and the power ON/OFF button below the starboard side stop. On the front of the robot, there are another two red mushroom stop buttons.  These are described further in \autoref{rearbuttons}.
 
 \bgroup
 \def\arraystretch{1.2}%
@@ -116,7 +116,7 @@ There are four push buttons located on the back of the Ridgeback: The two red mu
 
 	Power ON/OFF & Turns Ridgeback on or off. Note that the power button is a soft, momentary switch: to shut Ridgeback down, press and release it, and when the onboard PC has completed a safe power-down, the robot itself will also de-power. \\ \hline
 
-	Stop (x2) & Stops Ridgeback by placing the four integrated motor drivers into an electrical reset condition. This is intended as a backup option for immobilizing Ridgeback when autonomy software malfunctions or commands unintended motion. The stop buttons have a mechanical latch, which can be released by twisting the latched button.
+	Stop (x4) & Stops Ridgeback by placing the four integrated motor drivers into an electrical reset condition. This is intended as a backup option for immobilizing Ridgeback when autonomy software malfunctions or commands unintended motion. The stop buttons have a mechanical latch, which can be released by twisting the latched button.
 
 	If you have a wireless e-stop, pendant, or other stop-asserting hardware you'd like to integrate with Ridgeback, a breakout header is supplied on the main microcontroller PCB. For details on this interface, please contact Clearpath Robotics. \\ \hline
 
@@ -173,13 +173,13 @@ The User Bay provides access to the User Power panel, as well as USB and Etherne
 	\centering
 	\begin{tabular}{>{\columncolor{lightgrey}}>{\raggedright}m{.3\textwidth} p{.65\textwidth}} \hline
 
-	192.168.131.1 & Onboard PC (both ports, br0 network interface). \\ \hline
+	192.168.1.1 & Onboard PC (both ports, br0 network interface). \\ \hline
 
-	192.168.131.2 & Ethernet-connected MCU. \\ \hline
+	192.168.1.2 & Ethernet-connected MCU. \\ \hline
 
-	192.168.131.14 & Front-facing LIDAR. \\ \hline
+	192.168.1.14 & Front-facing LIDAR. \\ \hline
 
-	192.168.131.13 & Rear-facing LIDAR (optional). \\ \hline
+	192.168.1.13 & Rear-facing LIDAR (optional). \\ \hline
 
 	\end{tabular}
 \newline
@@ -337,7 +337,7 @@ When starting out, favor slower wheel speeds. Ridgeback's control loops can accu
 
 \subsection{Stop Buttons}
 
-Two red Stop buttons are located on the back of Ridgeback. When in Stop mode the Ridgeback will not drive. The commands received during stop are not buffered; Ridgeback will always act on the latest commands received. This means that if the commands are stopped before the Stop button is released, the Ridgeback will not move. If the commands are continued, Ridgeback will move at the speed commanded once the Stop is released.
+Two red Stop buttons are located on the front and back of Ridgeback. When in Stop mode the Ridgeback will not drive. The commands received during stop are not buffered; Ridgeback will always act on the latest commands received. This means that if the commands are stopped before the Stop button is released, the Ridgeback will not move. If the commands are continued, Ridgeback will move at the speed commanded once the Stop is released.
 
 Always ensure the Stop button is accessible at all times. Avoid mounting payloads that extend over the rear of Ridgeback and would occlude the Stop buttons.
 
@@ -467,7 +467,7 @@ The battery pack is rugged and designed for the environments into which Ridgebac
 When storing Ridgeback for long periods of time, its important to properly maintain the batteries to fully maximize their life.  Consider one of the following two procedures when placing Ridgeback in long-term storage:
 
 \begin{itemize}[nolistsep]
-	\item Fully charge Ridgeback, turn it off and put it into storage.  Once a week, connect power to the charger and allow the charger to top up the battery for an hour or so.
+	\item Fully charge Ridgeback, turn it off and put it into storage.  Once a week, connect power to the charger and allow the charger to top up the battery for an hour or so. 
 	\item Fully charge Ridgeback, turn it off and put it into storage, but leave the charger connected and powered the enitre time Ridgeback is in storage.  The charger will monitor the battery and will automatically charge it up as needed.
 \end{itemize}
 
