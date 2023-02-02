@@ -1,6 +1,10 @@
 Ridgeback User Manual
 ==================
 
+----
+# **NOTE: This manual has been superceded. Find the latest Ridgeback user manual at [docs.clearpathrobotics.com](https://docs.clearpathrobotics.com/docs/robots/indoor_robots/ridgeback/user_manual_ridgeback/).**
+----
+
 This repository contains the LaTeX source code for building the end user product
 documentation for [Ridgeback](http://www.clearpathrobotics.com/ridgeback/). If you are
 an end user, please download the official and released version of the manual from
